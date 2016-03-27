@@ -18,7 +18,7 @@ args = parser.parse_args()
 base = 'https://api-staging.aimbrain.com:443' if args.staging else 'https://api.aimbrain.com:443'
 
 signature = base64.b64encode(hmac.new(bytes(args.apisecret).encode('utf-8'),
-    bytes(args.method + '\n' + args.endpoint + '\n' + args.request + '').encode('utf-8'),
+    bytes(args.method.upper() + '\n' + args.endpoint.lower() + '\n' + args.request + '').encode('utf-8'),
     digestmod=hashlib.sha256).digest())
 
 curlReq = 'curl '\
