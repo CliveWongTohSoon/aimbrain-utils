@@ -15,7 +15,7 @@ parser.add_argument('-r', '--run', action='store_true', help='Run the outputed c
 args = parser.parse_args()
 
 # Construct curl request
-base = 'https://authenticator1.aimbrain.com:443'
+base = 'https://authenticator.aimbrain.com:443'
 http_method = args.method.upper()
 endpoint = args.endpoint.lower()
 
@@ -27,7 +27,7 @@ signature = base64.b64encode(hmac.new(bytes(args.apisecret).encode('utf-8'),
     bytes(http_method + '\n' + endpoint + '\n' + request + '').encode('utf-8'),
     digestmod=hashlib.sha256).digest())
 
-curlReq = 'curl -k '\
+curlReq = 'curl '\
     + base + endpoint + ' '\
     '-H \'Content-Type: application/json\' '\
     '-H \'X-aimbrain-apikey: ' + args.apikey + '\' '\
